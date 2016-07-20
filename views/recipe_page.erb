@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <% if @recipe %>
+      <h2><%= @recipe.name %></h2>
+      <h4>Categories</h4>
+      <ul>
+      <% @recipe.categories.each() do |category| %>
+        <li><%= category.name() %></li>
+      <% end %>
+      </ul>
+      <h4>Ingredients</h4>
+      <ul>
+      <% @recipe.ingredients.each_with_index() do |ingredient, index| %>
+        <li><%= ingredient.name() %>: <%= @measurements[index].measurement() %> <%= @measurements[index].unit() %></li>
+      <% end %>
+      </ul>
+      <form class="well" action="/add_instructions_to_recipe" method="post">
+        <input type="hidden" name="_method" value="patch">
+        <input type="hidden" name="recipe_id" value="<%= @recipe.id() %>">
+        <label for="recipe_instructions"></label>
+        <textarea name="recipe_instructions" rows="3" cols="30"></textarea>
+        <button type="button" name="button"></button>
+        <div class="col-sm-offset-1 col-sm-11">
+          <button type="submit" class="btn btn-success">Add Instructions</button>
+        </div>
+      </form>
+      <form action="/delete_recipe" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="hidden" name="recipe_id_delete" value="<%= @recipe.id() %>">
+        <button type="submit" class="btn btn-lg btn-danger">Delete Recipe</button>
+      </form>
+    <% end %>
+    <% if @recipe_created %>
+    <h2><%= @recipe_created.name %></h2>
+    <h4><%= @recipe_created.instructions() %></h4>
+    <ul>
+    <% @recipe_created.categories.each() do |category| %>
+      <li><%= category.name() %></li>
+    <% end %>
+    </ul>
+    <form action="/delete_recipe" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <input type="hidden" name="recipe_id_delete" value="<%= @recipe_created.id() %>">
+      <button type="submit" class="btn btn-lg btn-danger">Delete Recipe</button>
+    </form>
+    <% end %>
+    <p>
+      <a href="/" class="btn btn-lg btn-info">Return to Homepage</a>
+    </p>
+  </div>
+</div>

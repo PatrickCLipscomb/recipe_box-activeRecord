@@ -10,3 +10,18 @@ require('capybara/rspec')
 Capybara.app = Sinatra::Application
 set(:show_exceptions, false)
 require('./app')
+
+RSpec.configure do |config|
+  config.after(:each) do
+    Category.all.each do |category|
+      category.destroy
+    end
+    Ingredient.all.each do |ingredient|
+      ingredient.destroy
+    end
+    Recipe.all.each do |recipe|
+      recipe.destroy
+    end
+  end
+
+end

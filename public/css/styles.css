@@ -46,3 +46,27 @@
   font-size: 30px;
   font-weight: bolder;
 }
+
+/*ingredient_ids = params.fetch('ingredient_ids')
+ingredient_ids.each() do |ingredient_id|
+  Measurement.create({recipe_id: @recipe.id, ingredient_id: ingredient_id, measurement: params[ingredient_id + '_quantity'], unit: params[ingredient_id + '_unit']})
+end*/
+
+
+/*<label for="<%= ingredient.id() %>_quantity">Enter Quantity for <%= ingredient.name() %></label>
+<input type="number" step="0.01" name="<%= ingredient.id() %>_quantity">
+<label for="<%= ingredient.id() %>_unit">Enter Units for <%= ingredient.name() %>'s measurment</label>
+<input type="text" name="<%= ingredient.id() %>_unit">*/
+
+/*<ul>
+<% @recipe.ingredients.each_with_index() do |ingredient, index| %>
+  <li><%= ingredient.name() %>: <%= ingredient.measurements() %> <%= ingredient.unit() %></li>
+<% end %>
+</ul>*/
+
+
+
+
+
+/*# ingredient_obj = Ingredient.find(ingredient_id)
+# @recipe.ingredients.push(ingredient_obj)*/
