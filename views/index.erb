@@ -1,0 +1,49 @@
+<div class="row">
+
+
+<div class="col-sm-6">
+  <h3>Recipies</h3>
+  <% if @recipies.any?() %>
+  <ul>
+    <% @recipies.each() do |recipe| %>
+      <li><a href="/recipe/<%= recipe.id() %>"><%= recipe.name() %></a></li>
+    <% end %>
+  <% else %>
+    <h4>No recipies have been added yet!</h4>
+  <% end %>
+  </ul>
+</div>
+<div class="col-sm-6">
+  <h3>Add Recipes</h3>
+  <form class="well" action="/add_recipe" method="post">
+    <label for="new_recipe_name">Enter Recipe Name</label>
+    <input type="text" name="new_recipe_name">
+    <% @ingredients.each() do |ingredient| %>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="ingredient_ids[]" value="<%= ingredient.id() %>"><%= ingredient.name() %>
+        </label>
+        <label for="<%= ingredient.id() %>_quantity">Enter Quantity for <%= ingredient.name() %></label>
+        <input type="number" step="0.01" name="<%= ingredient.id() %>_quantity">
+        <label for="<%= ingredient.id() %>_unit">Enter Units for <%= ingredient.name() %>'s measurment</label>
+        <input type="text" name="<%= ingredient.id() %>_unit">
+      </div>
+    <% end %>
+    <div class="col-sm-offset-1 col-sm-11">
+      <button type="submit" class="btn btn-success">Add Recipe</button>
+    </div>
+  </form>
+</div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <p>
+      <a href="/add_items" class="btn btn-lg btn-success">Add Ingredients</a>
+    </p>
+
+  </div>
+  <div class="col-sm-6">
+
+  </div>
+
+</div>

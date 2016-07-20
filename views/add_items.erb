@@ -1,0 +1,39 @@
+<div class="col-sm-6">
+  <h3>Add Ingredients</h3>
+  <form class="well" action="/add_ingredient" method="post">
+    <div class="form-group row">
+      <label for="new_ingredient_name" class="col-sm-2 form-control-label">Ingredient Name</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="text" name="new_ingredient_name" value="">
+      </div>
+    </div>
+    <div class="col-sm-offset-1 col-sm-11">
+      <button type="submit" class="btn btn-success">Add Ingredient</button>
+    </div>
+  </form>
+  <% if @ingredient %>
+    <h4 class="cent tpadding">Ingredient: <%= @ingredient.name %> added</h4>
+    <hr class="tpadding">
+  <% end %>
+</div>
+<div class="col-sm-6">
+  <h3>Add Categories</h3>
+  <form class="well" action="/add_category" method="post">
+    <div class="form-group row">
+      <label for="new_category_name" class="col-sm-2 form-control-label">Category Name</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="text" name="new_category_name" value="">
+      </div>
+    </div>
+    <div class="col-sm-offset-1 col-sm-11">
+      <button type="submit" class="btn btn-success">Add Category</button>
+    </div>
+  </form>
+  <% if @category %>
+    <h4 class="cent tpadding">Category: <%= @category.name %> added</h4>
+    <hr class="tpadding">
+  <% end %>
+</div>
+<p>
+  <a href="/" class="btn btn-lg btn-info">Return to Homepage</a>
+</p>
