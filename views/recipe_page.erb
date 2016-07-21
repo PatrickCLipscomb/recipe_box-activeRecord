@@ -14,12 +14,11 @@
         <li><%= ingredient.name() %>: <%= @measurements[index].measurement() %> <%= @measurements[index].unit() %></li>
       <% end %>
       </ul>
-      <form class="well" action="/add_instructions_to_recipe" method="post">
+      <form  action="/add_instructions_to_recipe" method="post">
         <input type="hidden" name="_method" value="patch">
         <input type="hidden" name="recipe_id" value="<%= @recipe.id() %>">
         <label for="recipe_instructions"></label>
-        <textarea name="recipe_instructions" rows="3" cols="30"></textarea>
-        <button type="button" name="button"></button>
+        <textarea name="recipe_instructions" rows="3" cols="30"><%= @recipe.instructions %></textarea>
         <div class="col-sm-offset-1 col-sm-11">
           <button type="submit" class="btn btn-success">Add Instructions</button>
         </div>
@@ -29,23 +28,66 @@
         <input type="hidden" name="recipe_id_delete" value="<%= @recipe.id() %>">
         <button type="submit" class="btn btn-lg btn-danger">Delete Recipe</button>
       </form>
+      <p>
+        <a href="/" class="btn btn-lg btn-info">Return to Homepage</a>
+      </p>
+    </div>
+    <div class="col-sm-3 col-sm-offset-3">
+      <h4>Rate the Recipe</h4>
+      <form class="well" action="/add_rating" method="post">
+        <input type="hidden" name="_method" value="patch">
+        <input type="hidden" name="recipe_id_rate" value="<%= @recipe.id() %>">
+        <label for="recipe_rating">Enter your rating || <em>Between 1 and 10</em></label>
+        <input type="number" step='0.01' name="recipe_rating" value="">
+        <button type="submit" class="btn btn-success">Enter Rating</button>
+      </form>
     <% end %>
     <% if @recipe_created %>
-    <h2><%= @recipe_created.name %></h2>
-    <h4><%= @recipe_created.instructions() %></h4>
-    <ul>
-    <% @recipe_created.categories.each() do |category| %>
-      <li><%= category.name() %></li>
+      <h2><%= @recipe_created.name %></h2>
+      <h4><%= @recipe_created.instructions() %></h4>
+      <h5>Categories</h5>
+      <ul>
+      <% @recipe_created.categories.each() do |category| %>
+        <li><%= category.name() %></li>
+      <% end %>
+      </ul>
+      <h5>Ingredients</h5>
+      <ul>
+        <% @recipe_created.ingredients.each_with_index() do |ingredient, index| %>
+          <li><%= ingredient.name() %>: <%= @measurements[index].measurement() %> <%= @measurements[index].unit() %></li>
+        <% end %>
+      </ul>
+      <form  action="/add_instructions_to_recipe" method="post">
+        <input type="hidden" name="_method" value="patch">
+        <input type="hidden" name="recipe_id" value="<%= @recipe_created.id() %>">
+        <label for="recipe_instructions"></label>
+        <textarea name="recipe_instructions" rows="3" cols="30"><%= @recipe_created.instructions %></textarea>
+        <div class="col-sm-offset-1 col-sm-11">
+          <button type="submit" class="btn btn-success">Add Instructions</button>
+        </div>
+      </form>
+      <h5>Recipe Rating</h5>
+      <p>
+        <%= @recipe_created.rating() %>
+      </p>
+      <form action="/delete_recipe" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="hidden" name="recipe_id_delete" value="<%= @recipe_created.id() %>">
+        <button type="submit" class="btn btn-lg btn-danger">Delete Recipe</button>
+      </form>
+        <p>
+          <a href="/" class="btn btn-lg btn-info">Return to Homepage</a>
+        </p>
+      </div>
+      <div class="col-sm-3 col-sm-offset-3">
+        <h4>Rate the Recipe</h4>
+        <form class="well" action="/add_rating" method="post">
+          <input type="hidden" name="_method" value="patch">
+          <input type="hidden" name="recipe_id_rate" value="<%= @recipe_created.id() %>">
+          <label for="recipe_rating">Enter your rating || <em>Between 1 and 10</em></label>
+          <input type="number" step='0.01' name="recipe_rating" value="">
+          <button type="submit" class="btn btn-success">Enter Rating</button>
+        </form>
     <% end %>
-    </ul>
-    <form action="/delete_recipe" method="post">
-      <input type="hidden" name="_method" value="delete">
-      <input type="hidden" name="recipe_id_delete" value="<%= @recipe_created.id() %>">
-      <button type="submit" class="btn btn-lg btn-danger">Delete Recipe</button>
-    </form>
-    <% end %>
-    <p>
-      <a href="/" class="btn btn-lg btn-info">Return to Homepage</a>
-    </p>
   </div>
 </div>

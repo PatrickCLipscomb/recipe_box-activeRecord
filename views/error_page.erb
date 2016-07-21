@@ -1,0 +1,10 @@
+<div class="col-sm-6 col-sm-offset-3">
+  <% if @rating_error %>
+  <div class="alert alert-danger">
+    <strong>Rating entry not valid</strong>
+  </div>
+  <% end %>
+  <p>
+    <a href="/back_to_recipe_page/<%= @recipe_created.id() %>" class="btn btn-lg btn-infor">Go Back to the Recipe Page</a>
+  </p>
+</div>
